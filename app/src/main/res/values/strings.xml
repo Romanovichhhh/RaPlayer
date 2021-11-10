@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">RaPlayer</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="red">#E94C3D</string>
+    <string name="black">#2D2926</string>
+    <string name="white">#F1F3F4</string>
+</resources>
