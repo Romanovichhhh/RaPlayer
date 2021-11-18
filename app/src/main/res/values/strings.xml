@@ -5,4 +5,5 @@
     <string name="red">#E94C3D</string>
     <string name="black">#2D2926</string>
     <string name="white">#F1F3F4</string>
+    <string name="playlist">Плейлист</string>
 </resources>

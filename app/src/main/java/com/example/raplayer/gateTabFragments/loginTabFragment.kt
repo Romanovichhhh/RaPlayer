@@ -1,4 +1,4 @@
-package com.example.raplayer.tabFragments
+package com.example.raplayer.gateTabFragments
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -10,7 +10,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.example.raplayer.R
+import com.example.raplayer.data.SharedPrefs
 import kotlinx.android.synthetic.main.fragment_login_tab.view.*
 
 
@@ -27,8 +29,12 @@ class loginTabFragment : Fragment() {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_login_tab, container, false)
 
+        val sharedPrefs = SharedPrefs(requireContext())
 
-        saveSession()
+        view.loginButton.setOnClickListener {
+            sharedPrefs.saveSession(requireContext())
+            findNavController().navigate(R.id.action_enterFragment_to_mainMenuFragment)
+        }
 
 
 
@@ -36,12 +42,12 @@ class loginTabFragment : Fragment() {
     }
 
 
-    private fun saveSession() {
-
-        sharedPreferences = requireActivity().getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-        editor = sharedPreferences.edit();
-        editor.apply{putBoolean("BOOLEAN_KEY", true)}.apply()
-    }
+//    private fun saveSession() {
+//
+//        sharedPreferences = requireActivity().getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+//        editor = sharedPreferences.edit();
+//        editor.apply{putBoolean("BOOLEAN_KEY", true)}.apply()
+//    }
 
     //Функция корректности ввода
     private fun dataIsValid(view: View?): Boolean {

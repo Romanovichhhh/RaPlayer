@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/enterFragment">
+
+    <fragment
+        android:id="@+id/enterFragment"
+        android:name="com.example.raplayer.EnterFragment"
+        android:label="fragment_enter"
+        tools:layout="@layout/fragment_enter" >
+        <action
+            android:id="@+id/action_enterFragment_to_mainMenuFragment"
+            app:destination="@id/mainMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainMenuFragment"
+        android:name="com.example.raplayer.MainMenuFragment"
+        android:label="fragment_main_menu"
+        tools:layout="@layout/fragment_main_menu" >
+        <action
+            android:id="@+id/action_mainMenuFragment_to_enterFragment"
+            app:destination="@id/enterFragment" />
+        <action
+            android:id="@+id/action_mainMenuFragment_to_trackFragment"
+            app:destination="@id/trackFragment" />
+        <action
+            android:id="@+id/action_mainMenuFragment_to_folderFragment"
+            app:destination="@id/folderFragment" />
+        <action
+            android:id="@+id/action_mainMenuFragment_to_albumFragment2"
+            app:destination="@id/albumFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/trackFragment"
+        android:name="com.example.raplayer.TrackFragment"
+        android:label="fragment_track"
+        tools:layout="@layout/fragment_track" >
+        <action
+            android:id="@+id/action_trackFragment_to_mainMenuFragment"
+            app:destination="@id/mainMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/folderFragment"
+        android:name="com.example.raplayer.FolderArtistFragment"
+        android:label="fragment_folder"
+        tools:layout="@layout/fragment_folder_artist" >
+        <action
+            android:id="@+id/action_folderFragment_to_trackFragment"
+            app:destination="@id/trackFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/albumFragment2"
+        android:name="com.example.raplayer.AlbumFragment"
+        android:label="fragment_album"
+        tools:layout="@layout/fragment_album" >
+        <action
+            android:id="@+id/action_albumFragment2_to_mainMenuFragment"
+            app:destination="@id/mainMenuFragment" />
+        <action
+            android:id="@+id/action_albumFragment2_to_trackFragment"
+            app:destination="@id/trackFragment" />
+    </fragment>
+</navigation>
