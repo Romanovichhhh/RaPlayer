@@ -9,22 +9,25 @@ class SharedPrefs(context: Context) {
 
     var sharedPref : SharedPreferences? = null;
 
-    private fun openPrefs(context: Context){
-        sharedPref = context.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-    }
+
+        fun getPrefs(context:Context): SharedPreferences {
+            return if (sharedPref == null) {
+                sharedPref = context.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+                sharedPref
+            } else {
+                sharedPref
+            }!!
+        }
 
     fun saveSession(context: Context) {
-        openPrefs(context)
-        val editor = sharedPref?.edit()
-        editor?.apply{putBoolean("BOOLEAN_KEY", true)}?.apply()
-        sharedPref = null
+        getPrefs(context).edit().putBoolean("BOOLEAN_KEY", true).apply()
     }
 
     fun isSession(context: Context) : Boolean{
         var session = false
-        openPrefs(context)
-        session = sharedPref!!.getBoolean("BOOLEAN_KEY", false)
+        getPrefs(context).getBoolean("BOOLEAN_KEY", false)
         return session
     }
+
 
 }

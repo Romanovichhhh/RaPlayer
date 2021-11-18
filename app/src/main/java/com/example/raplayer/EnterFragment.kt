@@ -13,13 +13,15 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 
-private lateinit var adapter: SlideAdapterGate
-private lateinit var viewPager: ViewPager2
-private lateinit var tabLayout: TabLayout
+
 
 private val tabNames: Array<String> = arrayOf("Вход", "Регистрация")
 
 class EnterFragment : Fragment() {
+
+    private lateinit var adapter: SlideAdapterGate
+    private lateinit var viewPager: ViewPager2
+    private lateinit var tabLayout: TabLayout
 
 
     override fun onCreateView(

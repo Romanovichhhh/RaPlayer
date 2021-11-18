@@ -14,14 +14,17 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 
-private lateinit var adapter: TabAdapter
-private lateinit var viewPager: ViewPager2
-private lateinit var tabLayout: TabLayout
 
-private val tabNames: Array<String> = arrayOf("Треки", "Альбомы", "Исполнители", "Папки")
+
+
 
 class MainMenuFragment : Fragment() {
 
+
+    private lateinit var adapter: TabAdapter
+    private lateinit var viewPager: ViewPager2
+    private lateinit var tabLayout: TabLayout
+    private val tabNames: Array<String> = arrayOf("Треки", "Альбомы", "Исполнители", "Папки")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

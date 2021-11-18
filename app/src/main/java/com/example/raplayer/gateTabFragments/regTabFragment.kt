@@ -70,14 +70,7 @@ class regTabFragment : Fragment() {
 
     }
 
-////        TODO Вынести интерфейс работы с Преференсами в отдельный файл
-//    private fun saveSession() {
-//
-//        sharedPreferences = requireActivity().getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-//        editor = sharedPreferences.edit();
-//        editor.apply{putBoolean("BOOLEAN_KEY", true)}.apply()
-//
-//    }
+
 
     //        TODO Перегрузить эту функцию и впилить в файл интерфейса работы с вьюхами
     //Проверка на правильность ввода данных
