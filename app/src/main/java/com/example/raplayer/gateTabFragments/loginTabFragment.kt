@@ -10,18 +10,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.raplayer.R
+import com.example.raplayer.data.Model
 import com.example.raplayer.data.SharedPrefs
+import com.example.raplayer.data.User
+import com.example.raplayer.data.UserViewModel
 import kotlinx.android.synthetic.main.fragment_login_tab.view.*
+import kotlinx.android.synthetic.main.fragment_login_tab.view.enterEmail
+import kotlinx.android.synthetic.main.fragment_login_tab.view.enterPassword
+import kotlinx.android.synthetic.main.fragment_reg_tab.view.*
+import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.launch
 
-
+@InternalCoroutinesApi
+private lateinit var mUserViewModel : UserViewModel
 private lateinit var sharedPreferences: SharedPreferences
 private lateinit var editor: SharedPreferences.Editor
 
 
 class loginTabFragment : Fragment() {
 
+
+    @InternalCoroutinesApi
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,11 +42,30 @@ class loginTabFragment : Fragment() {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_login_tab, container, false)
 
+        mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+
         val sharedPrefs = SharedPrefs(requireContext())
 
         view.loginButton.setOnClickListener {
-            sharedPrefs.saveSession(requireContext())
-            findNavController().navigate(R.id.action_enterFragment_to_mainMenuFragment)
+
+            val enteredEmail : String = view?.enterEmail?.text.toString()
+            val enteredPassword : String = view?.enterPassword?.text.toString()
+            val model = Model(requireContext())
+            var userExists : Int;
+
+            if(model.dataIsValid(enteredEmail, enteredPassword, requireContext())) {
+                lifecycleScope.launch {
+                    userExists = mUserViewModel.checkUser(enteredEmail,enteredPassword)
+
+                    if(userExists > 0) {
+                        Toast.makeText(requireActivity(), "Вы успешно вошли", Toast.LENGTH_SHORT).show()
+                        findNavController().navigate(R.id.action_enterFragment_to_mainMenuFragment)
+                    }
+                    else Toast.makeText(requireActivity(), "Такого пользователя не существует", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+
         }
 
 
@@ -41,62 +73,30 @@ class loginTabFragment : Fragment() {
         return view
     }
 
-
-//    private fun saveSession() {
+//    @InternalCoroutinesApi
+//    private suspend fun checkUserInDatabase(view: View?) {
+//        val enteredEmail : String = view?.enterEmail?.text.toString()
+//        val enteredPassword : String = view?.enterPassword?.text.toString()
+//        val sharedPrefs = SharedPrefs(requireContext())
 //
-//        sharedPreferences = requireActivity().getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-//        editor = sharedPreferences.edit();
-//        editor.apply{putBoolean("BOOLEAN_KEY", true)}.apply()
+//        var userExists : Int;
+//
+//        lifecycleScope.launch {
+//            userExists = mUserViewModel.checkUser(enteredEmail,enteredPassword)
+//        }
+//
+//        if(userExists > 0) {
+//            sharedPrefs.saveSession(requireContext())
+//            Toast.makeText(requireActivity(), "Вы успешно вошли", Toast.LENGTH_SHORT).show()
+//        }
+//        else {
+//            Toast.makeText(requireActivity(), "Такого пользователя не существует", Toast.LENGTH_SHORT).show()
+//        }
 //    }
 
-    //Функция корректности ввода
-    private fun dataIsValid(view: View?): Boolean {
-
-        var checked: Boolean = false
-
-        val enteredEmail: String = view?.enterEmail?.text.toString()
-        val enteredPassword: String = view?.enterPassword?.text.toString()
-
-
-        //Проверка на то, заполнены ли все поля
-        if (enteredEmail.isNotEmpty() && enteredPassword.isNotEmpty()) {
-            //Проверка на правильно введённый пароль
-            if (isValidEmail(enteredEmail)) {
-                //Проверка на нужное количество символов в пароле
-                if (enteredPassword?.length in 6..20) {
-                    //Проверка на совпадение поля "Пароль" и "Повторите пароль"
-                    checked = true
-                    return checked //Если все проверки пройдены возвращаем true
-
-
-                    //Блок els'ов где выводятся соответствующие сообщения об ошибке
-                } else {
-                    Toast.makeText(
-                        requireActivity(),
-                        "Пароль введён некорректно",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return checked
-
-                }
-            } else {
-                Toast.makeText(requireActivity(), "Email введён некорректно", Toast.LENGTH_SHORT)
-                    .show()
-                return checked
-            }
-
-        } else {
-            Toast.makeText(requireActivity(), "Не все поля заполнены", Toast.LENGTH_SHORT)
-                .show()
-            return checked
-        }
-
-    }
-
-    private fun isValidEmail(target: CharSequence?): Boolean { //Функция проверяющая корректность введённого мыла
-        return !TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches()
-
-    }
+//    fun userExists(result: Int) : Boolean{
+//        return result > 0
+//    }
 
 
 }

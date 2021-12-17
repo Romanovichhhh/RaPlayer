@@ -24,9 +24,7 @@ class SharedPrefs(context: Context) {
     }
 
     fun isSession(context: Context) : Boolean{
-        var session = false
-        getPrefs(context).getBoolean("BOOLEAN_KEY", false)
-        return session
+        return getPrefs(context).getBoolean("BOOLEAN_KEY", false)
     }
 
 

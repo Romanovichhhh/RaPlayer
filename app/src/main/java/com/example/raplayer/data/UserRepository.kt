@@ -10,4 +10,8 @@ class UserRepository(private val userDao: UserDao) {
         userDao.addUser(user)
     }
 
+    suspend fun checkUser(email: String, password : String) : Int {
+        return userDao.checkUser(email, password)
+    }
+
 }

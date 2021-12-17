@@ -110,38 +110,38 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab_telegram"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="70dp"
-                android:layout_marginBottom="16dp"
-                android:backgroundTint="@color/white"
-                android:elevation="35dp"
-                android:src="@drawable/telegram_icon2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view_pager"
-                app:maxImageSize="30dp"
-                tools:ignore="SpeakableTextPresentCheck" />
+<!--            <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--                android:id="@+id/fab_telegram"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="70dp"-->
+<!--                android:layout_marginBottom="16dp"-->
+<!--                android:backgroundTint="@color/white"-->
+<!--                android:elevation="35dp"-->
+<!--                android:src="@drawable/telegram_icon2"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/view_pager"-->
+<!--                app:maxImageSize="30dp"-->
+<!--                tools:ignore="SpeakableTextPresentCheck" />-->
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/tab_vk"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="16dp"
-                android:backgroundTint="@color/white"
-                android:elevation="35dp"
-                android:src="@drawable/vk_icon2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/fab_telegram"
-                app:layout_constraintHorizontal_bias="1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view_pager"
-                app:maxImageSize="30dp"
-                tools:ignore="SpeakableTextPresentCheck" />
+<!--            <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--                android:id="@+id/tab_vk"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                android:layout_marginBottom="16dp"-->
+<!--                android:backgroundTint="@color/white"-->
+<!--                android:elevation="35dp"-->
+<!--                android:src="@drawable/vk_icon2"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toStartOf="@id/fab_telegram"-->
+<!--                app:layout_constraintHorizontal_bias="1"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/view_pager"-->
+<!--                app:maxImageSize="30dp"-->
+<!--                tools:ignore="SpeakableTextPresentCheck" />-->
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

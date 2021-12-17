@@ -5,7 +5,16 @@ dependencyResolutionManagement {
         mavenCentral()
         jcenter() // Warning: this repository is going to shut down soon
         maven { url "https://jitpack.io" }
+
+        flatDir {
+            dirs('app/spotify_lib')
+        }
     }
 }
 rootProject.name = "RaPlayer"
 include ':app'
+//allprojects {
+//    repositories {
+//
+//    }
+//}

@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.raplayer.R
+import com.example.raplayer.data.Model
 import com.example.raplayer.data.SharedPrefs
 import com.example.raplayer.data.User
 import com.example.raplayer.data.UserViewModel
@@ -44,10 +45,19 @@ class regTabFragment : Fragment() {
 
 
 
+
         view.registerButton.setOnClickListener {
 
+            val enteredEmail : String = view?.enterEmail?.text.toString()
+            val enteredUsername : String = view?.enterUsername?.text.toString()
+            val enteredPassword : String = view?.enterPassword?.text.toString()
+            val repeatedPassword : String = view?.repeatPassword?.text.toString()
+            val model = Model(requireContext())
+
+            if(model.dataIsValid(enteredEmail, enteredUsername, enteredPassword, repeatedPassword, requireContext())) {
             insertDataToDatabase(view)
             findNavController().navigate(R.id.action_enterFragment_to_mainMenuFragment)
+            }
         }
 
 
@@ -56,78 +66,20 @@ class regTabFragment : Fragment() {
 
     @InternalCoroutinesApi
     private fun insertDataToDatabase(view: View?) {
-        val enteredEmail : String? = view?.enterEmail?.text.toString()
-        val enteredUsername : String? = view?.enterUsername?.text.toString()
-        val enteredPassword : String? = view?.enterPassword?.text.toString()
+        val enteredEmail : String = view?.enterEmail?.text.toString()
+        val enteredUsername : String = view?.enterUsername?.text.toString()
+        val enteredPassword : String = view?.enterPassword?.text.toString()
         val sharedPrefs = SharedPrefs(requireContext())
-        if(dataIsValid(view)) {
-            val user = User(0,enteredUsername!!, enteredEmail!!, enteredPassword!!)
+
+            val user = User(0,enteredUsername, enteredEmail!!, enteredPassword!!)
             mUserViewModel.addUser(user)
             sharedPrefs.saveSession(requireContext())
             Toast.makeText(requireActivity(), "Вы успешно зарегестрировались", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_enterFragment_to_mainMenuFragment)
-        }
+
 
     }
 
 
-
-    //        TODO Перегрузить эту функцию и впилить в файл интерфейса работы с вьюхами
-    //Проверка на правильность ввода данных
-    private fun dataIsValid (view: View?) : Boolean {
-        var checked : Boolean = false
-
-        val enteredEmail : String? = view?.enterEmail?.text.toString()
-        val enteredUsername : String? = view?.enterUsername?.text.toString()
-        val enteredPassword : String? = view?.enterPassword?.text.toString()
-        val repeatedPassword : String? = view?.repeatPassword?.text.toString()
-
-        //Проверка на то, заполнены ли все поля
-        if(enteredEmail?.isNotEmpty() == true && enteredUsername?.isNotEmpty() == true && enteredPassword?.isNotEmpty() == true && repeatedPassword?.isNotEmpty() == true) {
-            //Проверка на правильно введённый пароль
-            if (isValidEmail(enteredEmail)) {
-                //Проверка на нужное количество символов в пароле
-                if (enteredPassword?.length in 6..20) {
-                    //Проверка на совпадение поля "Пароль" и "Повторите пароль"
-                    if (enteredPassword == repeatedPassword) {
-                        //Проверка на пробелы в юзернейме
-                        return if (!enteredUsername.contains(" ",false)) {
-                            checked = true
-                            checked //Если все проверки пройдены возвращаем true
-                        } else {
-                            Toast.makeText(requireActivity(), "Имя пользователя введено некорректно", Toast.LENGTH_SHORT)
-                                .show()
-                            checked
-                        }
-
-                        //Блок els'ов где выводятся соответствующие сообщения об ошибке
-                    } else {
-                        Toast.makeText(requireActivity(), "Пароли не совпадают", Toast.LENGTH_SHORT)
-                            .show()
-                        return checked
-                    }
-                } else {
-                    Toast.makeText(
-                        requireActivity(),
-                        "Пароль введён некорректно",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return checked
-                }
-            } else {
-                Toast.makeText(requireActivity(), "Email введён некорректно", Toast.LENGTH_SHORT).show()
-                return checked
-            }
-        }
-        else {
-            Toast.makeText(requireActivity(), "Не все поля заполнены", Toast.LENGTH_SHORT).show()
-            return checked
-        }
-    }
-    // Встроеная функция проверки емейла
-    private fun isValidEmail(target: CharSequence?): Boolean { //Функция проверяющая корректность введённого мыла
-        return !TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches()
-    }
 
 
 }

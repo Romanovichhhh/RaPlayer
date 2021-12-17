@@ -26,4 +26,10 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         repository.addUser(user)
         }
     }
+
+    suspend fun checkUser(email: String, password : String) : Int {
+
+        return repository.checkUser(email, password)
+
+    }
 }

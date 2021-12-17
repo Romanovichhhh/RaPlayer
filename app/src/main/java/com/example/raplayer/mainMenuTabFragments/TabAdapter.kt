@@ -6,14 +6,14 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 
 
 class TabAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
-    override fun getItemCount(): Int = 4
+    override fun getItemCount(): Int = 2
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> {TracksTabFragment()}
-            1 -> {AlbumsTabFragment()}
-            2 -> {ArtistsTabFragment()}
-            else -> { return FoldersTabFragment()}
+//            1 -> {AlbumsTabFragment()}
+//            2 -> {ArtistsTabFragment()}
+            else -> { return AlbumsTabFragment()}
         }
     }
 
