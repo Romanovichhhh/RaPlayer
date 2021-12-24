@@ -5,9 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import com.example.raplayer.data.Model
-import com.example.raplayer.data.SongInfo
 
 
 class TrackFragment() : Fragment() {
@@ -26,14 +23,6 @@ class TrackFragment() : Fragment() {
         return view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-        var songInfo = SongInfo(arguments?.getString("songTitle"), arguments?.getString("URL"))
-
-        context?.let { Model(it) }?.BindTrackView(songInfo, view, findNavController())
-
-
-    }
 
 }

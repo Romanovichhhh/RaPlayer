@@ -35,7 +35,8 @@ class EnterFragment : Fragment() {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_enter, container, false)
 
-        permissionInternetSetup()
+        permissionStorageSetup()
+
 
         adapter = SlideAdapterGate(this)
         viewPager = view.findViewById(R.id.view_pager)
@@ -51,14 +52,12 @@ class EnterFragment : Fragment() {
         return view
     }
 
-    private fun permissionInternetSetup() {
-        val internetPermission = ContextCompat.checkSelfPermission(
-            requireContext(), android.Manifest.permission.INTERNET)
+    private fun permissionStorageSetup() {
+        val storagePermission = ContextCompat.checkSelfPermission(
+            requireContext(), android.Manifest.permission.READ_EXTERNAL_STORAGE)
 
-
-        if ( internetPermission != PackageManager.PERMISSION_GRANTED) {
-
-            permissionsResultCallback.launch(android.Manifest.permission.INTERNET)
+        if (storagePermission != PackageManager.PERMISSION_GRANTED) {
+            permissionsResultCallback.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE)
         }
     }
 

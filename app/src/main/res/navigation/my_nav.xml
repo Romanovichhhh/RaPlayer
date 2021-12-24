@@ -11,6 +11,8 @@
         android:label="fragment_enter"
         tools:layout="@layout/fragment_enter" >
         <action
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/slide_out"
             android:id="@+id/action_enterFragment_to_mainMenuFragment"
             app:destination="@id/mainMenuFragment" />
     </fragment>

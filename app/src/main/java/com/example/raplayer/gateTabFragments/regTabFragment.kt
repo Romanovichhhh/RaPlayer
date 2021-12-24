@@ -2,11 +2,8 @@
 package com.example.raplayer.gateTabFragments
 
 
-import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.text.TextUtils
-import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +12,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.raplayer.R
-import com.example.raplayer.data.Model
+import com.example.raplayer.data.models.Model
 import com.example.raplayer.data.SharedPrefs
 import com.example.raplayer.data.User
 import com.example.raplayer.data.UserViewModel
@@ -25,10 +22,12 @@ import kotlinx.coroutines.InternalCoroutinesApi
 
 private lateinit var sharedPreferences: SharedPreferences
 private lateinit var editor: SharedPreferences.Editor
+
 @InternalCoroutinesApi
 private lateinit var mUserViewModel : UserViewModel
 
 class regTabFragment : Fragment() {
+
 
 
 

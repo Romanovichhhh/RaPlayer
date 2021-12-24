@@ -23,7 +23,6 @@ import java.util.ArrayList
 class TracksTabFragment : Fragment() {
 
     var listSong = ArrayList<SongInfo>()
-    var mediaPlayer : MediaPlayer? = null
     var adapter : ListAdapter? = null
 
 
@@ -37,10 +36,10 @@ class TracksTabFragment : Fragment() {
 
         val rootPath = "/sdcard/Music"
 
-        //var Spot
 
 
-        val adapter = getPlayList(rootPath)?.let { ListAdapter(it, mediaPlayer, requireContext(), view, findNavController()) }
+
+        adapter = getPlayList(rootPath)?.let { ListAdapter(it,  requireContext(), view) }
         val recyclerView = view.listViewTracks
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -51,15 +50,6 @@ class TracksTabFragment : Fragment() {
     }
 
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-        val a = arguments?.getString("songTitle")
-        view.presentTrack.text = arguments?.getString("songTitle")
-        mediaPlayer?.setDataSource(arguments?.getString("URL"))
-    }
 
     fun getPlayList(rootPath : String) : ArrayList<SongInfo>? {
         try {
